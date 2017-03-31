@@ -1,0 +1,21 @@
+development: &development
+  protocol: 'http'
+  host: localhost
+  port: 5984
+  prefix: edrs
+  suffix: dashbaord
+  username: admin
+  password: password
+
+test:
+  <<: *development
+  suffix: test
+
+production:
+  protocol: 'http'
+  host: localhost
+  port: 5984
+  prefix: ebrs_dashboard
+  suffix: production
+  username: admin
+  password: password
