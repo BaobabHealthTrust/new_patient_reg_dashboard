@@ -1,0 +1,55 @@
+h4{
+
+	color: #484a4c;
+	font-size: 180%;
+}
+th {
+
+    font-weight: bold;
+    text-align: left;
+    
+}
+td, th {
+    padding: 0;
+    border-bottom: 1.5px dotted #484a4c;
+  
+}
+
+
+thead th {
+	border-top: none;
+	
+	padding: 0px;
+}
+body {
+	height: 100%;
+    overflow:hidden;
+    margin: 0px !important;
+}
+#main{
+	color: #484a4c;
+	border: solid 0.1em;
+	border-color: #484a4c;
+	font-size: 115%;
+	width: 100%; 
+	height: 100%; 
+	overflow: hidden;
+
+}
+#right{
+	width: 96%;
+	margin: auto;
+}
+#right table{
+	height: 90%;
+}
+#right td,th{
+	font-size: 75%;
+}
+
+#piechart{
+	color: 	#006680;
+	width: 80%;
+	margin: auto;
+	vertical-align: top;
+}
