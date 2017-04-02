@@ -1,21 +1,14 @@
-development: &development
+hq:
   protocol: 'http'
   host: localhost
   port: 5984
-  prefix: edrs
-  suffix: dashboard
+  primary: edrs_hq
   username: admin
   password: password
-
-test:
-  <<: *development
-  suffix: test
-
-production:
+dashboard:
   protocol: 'http'
   host: localhost
   port: 5984
-  prefix: ebrs_dashboard
-  suffix: production
+  primary: edrs_dashboard
   username: admin
   password: password

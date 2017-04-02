@@ -1,5 +1,8 @@
+require 'couchrest_model'
+
 class District < CouchRest::Model::Base
-	def district_code=(value)
+
+  def district_code=(value)
     self['_id']=value.to_s
   end
 
@@ -17,4 +20,5 @@ class District < CouchRest::Model::Base
       view :by_name
       view :by_region
   end
+
 end
