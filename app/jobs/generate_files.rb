@@ -322,8 +322,17 @@ class GenerateFiles
 	    else
 	        registered= registered_data.each.count
 	    end
-	    r = {"reported"=> reported, "registered" => registered, "printed"=>0, "reprinted"=>0, "incompleted"=>0, 
-	         "suspected_duplicates"=>0, "amendements_requests"=>0, "verified"=> 0 }
+	    closed = PersonRecordStatus.by_status_and_created_at.startkey(["HQ CLOSED",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["HQ DISPATCHED",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    dispatched = PersonRecordStatus.by_status_and_created_at.startkey(["HQ DISPATCHED",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["HQ DISPATCHED",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    printed = closed + dispatched
+	    #PersonRecordStatus.by_status.keys(["HQ CLOSED","HQ DISPATCHED"]).each.count
+	    reprinted = PersonRecordStatus.by_reprint_date.startkey(start_date.strftime("%Y-%m-%dT00:00:000Z")).endkey(end_date.strftime("%Y-%m-%dT23:59:59.999Z")).each.collect{|s| s.person_record_id}.uniq.count
+	    suspected_duplicates = PersonRecordStatus.by_status_and_created_at.startkey(["HQ POTENTIAL DUPLICATE",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["HQ POTENTIAL DUPLICATE",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    amendements_requests = PersonRecordStatus.by_status_and_created_at.startkey(["DC AMEND",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["DC AMEND",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    incompleted = PersonRecordStatus.by_status_and_created_at.startkey(["HQ CONFIRMED INCOMPLETE",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["HQ CONFIRMED INCOMPLETE",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    verified = PersonRecordStatus.by_status_and_created_at.startkey(["HQ COMPLETE",start_date.strftime("%Y-%m-%dT00:00:000Z")]).endkey(["HQ COMPLETE",end_date.strftime("%Y-%m-%dT23:59:59.999Z")]).each.count
+	    r = {"reported"=> reported, "registered" => registered, "printed"=>printed, "reprinted"=>reprinted, "incompleted"=>incompleted, 
+	         "suspected_duplicates"=>suspected_duplicates, "amendements_requests"=>amendements_requests, "verified"=> verified }
 	    return r
 	  end
 	  

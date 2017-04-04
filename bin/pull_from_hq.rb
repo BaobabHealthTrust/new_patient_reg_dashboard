@@ -1,3 +1,4 @@
+Statistic.count
 @settings = SETTINGS
 hq = @settings[:hq]
 dashboard = @settings[:dashboard]
